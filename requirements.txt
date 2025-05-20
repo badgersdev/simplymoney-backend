@@ -1,0 +1,11 @@
+Django>=5.1
+django-cors-headers
+django-ninja
+django-ninja-jwt[crypto]
+python-dotenv
+pydantic[email]
+pillow
+dj-database-url
+gunicorn
+rav
+psycopg2-binary

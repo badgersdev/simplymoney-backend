@@ -1,0 +1,20 @@
+# Python
+*.pyc
+__pycache__/
+
+# Env
+.env
+.venv/
+venv/
+
+# Django
+db.sqlite3
+/media/
+staticfiles/
+
+# System
+.DS_Store
+*.log
+
+# Rav
+rav.yaml
