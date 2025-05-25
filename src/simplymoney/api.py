@@ -3,6 +3,8 @@ from ninja_jwt.authentication import JWTAuth
 from ninja_jwt.controller import NinjaJWTDefaultController
 from ninja_extra import NinjaExtraAPI
 from users.api import router as users_router
+from users.auth import JWTAuthFromCookie
+
 
 api = NinjaExtraAPI()
 api.register_controllers(NinjaJWTDefaultController)
@@ -19,7 +21,7 @@ class UserSchema(Schema):
     email: str = None
 
 
-@api.get("/me", response=UserSchema, auth=JWTAuth())
+@api.get("/me", response=UserSchema, auth=JWTAuthFromCookie())
 def me(request):
     return request.user
 
