@@ -15,7 +15,13 @@ class JWTAuthFromCookie(JWTAuth):
             UntypedToken(token)
             decoded = jwt_decode(
                 token, settings.SECRET_KEY, algorithms=["HS256"])
-            user = get_user_model().objects.get(id=decoded["user_id"])
+            user_id = decoded.get("user_id")
+
+            if not user_id:
+                return None
+
+            user = get_user_model().objects.get(id=user_id)
             return user
-        except (InvalidTokenError, get_user_model().DoesNotExist):
+
+        except (InvalidTokenError, get_user_model().DoesNotExist, KeyError):
             return None
