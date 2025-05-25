@@ -8,18 +8,16 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         User = get_user_model()
-        username = os.getenv("DEFAULT_ADMIN_USERNAME", "admin")
         email = os.getenv("DEFAULT_ADMIN_EMAIL", "admin@example.com")
         password = os.getenv("DEFAULT_ADMIN_PASSWORD", "admin123")
 
-        if not User.objects.filter(username=username).exists():
+        if not User.objects.filter(email=email).exists():
             User.objects.create_superuser(
-                username=username,
                 email=email,
                 password=password
             )
             self.stdout.write(self.style.SUCCESS(
-                f"Created superuser: {username}"))
+                f"✅ Superuser '{email}' created"))
         else:
             self.stdout.write(self.style.WARNING(
-                f"User '{username}' already exists"))
+                f"⚠️  Superuser '{email}' already exists"))
